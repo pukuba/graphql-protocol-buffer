@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package post;
+
+message Post {
+    string author = 1;
+    string content = 2;
+}
