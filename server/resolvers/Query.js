@@ -12,15 +12,13 @@ module.exports = {
         }
         const buf = post.Post.encode(post1)
         console.log(buf)
-        return new Promise((res, req) => {
-            return res(buf)
-        })
 
-        // const res = post.Post.decode(buf)
-        // console.log(res)
-        // const arr = []
-        // arr.push(post1)
-        // arr.push(post2)
-        // return arr
+
+        const res = post.Post.decode(buf)
+        console.log(res)
+        const arr = []
+        arr.push(post1)
+        arr.push(post2)
+        return arr
     }
 }

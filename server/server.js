@@ -9,6 +9,16 @@ const typeDefs = readFileSync('./typeDefs.graphql', 'utf-8')
 const resolvers = require('./resolvers')
 const app = express()
 
+const myPlugin = {
+
+    // Fires whenever a GraphQL request is received from a client.
+    requestDidStart(requestContext) {
+        console.log('Request started! Query:\n' +
+            requestContext.request.query);
+
+        return
+    },
+};
 const start = async () => {
     const client = await MongoClient.connect(
         "mongodb://localhost:27017/buffer-study", {
@@ -21,7 +31,10 @@ const start = async () => {
     const server = new ApolloServer({
         typeDefs,
         resolvers,
-        context: () => { db }
+        context: () => { db },
+        plugins: [
+            myPlugin
+        ]
     })
     server.applyMiddleware({ app })
 
