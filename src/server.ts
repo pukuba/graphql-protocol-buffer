@@ -26,12 +26,12 @@ app.listen(process.env.PORT, () => {
 app.use('/', (req: express.Request, res: express.Response) => {
     const post1 = {
         author: "Seung Won",
-        content: "hawawa",
-        lv: 175
+        content: "pukuba",
+        age: 17
     }
     const protoPath = path.join(__dirname, './proto/post.proto')
     const postProto = protobuf(fs.readFileSync(protoPath))
     const buf = postProto.Post.encode(post1)
-
+    console.log(buf)
     res.send(buf)
 })
