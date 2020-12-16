@@ -1,0 +1,35 @@
+{
+  "name": "protocol-buffer-study",
+  "version": "1.0.0",
+  "description": "study",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon 'src/server.ts' --exec 'ts-node' src/server.ts -e ts",
+    "build": "tsc -p .",
+    "start": "node dist/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pukuba/protocol-buffer-study.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pukuba/protocol-buffer-study/issues"
+  },
+  "homepage": "https://github.com/pukuba/protocol-buffer-study#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.3",
+    "nodemon": "^2.0.6",
+    "protocol-buffers": "^4.2.0",
+    "ts-node": "^9.1.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.9",
+    "@types/mongodb": "^3.6.3",
+    "@types/node": "^14.14.14",
+    "typescript": "^4.1.3"
+  }
+}

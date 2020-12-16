@@ -5,4 +5,5 @@ package post;
 message Post {
     string author = 1;
     string content = 2;
+    uint32 lv = 3;
 }
