@@ -31,7 +31,7 @@ app.use('/', (req: express.Request, res: express.Response) => {
     }
     const protoPath = path.join(__dirname, './proto/post.proto')
     const postProto = protobuf(fs.readFileSync(protoPath))
-    const buf = postProto.Post.encode(post1).toString()
+    const buf = postProto.Post.encode(post1)
 
-    res.end(buf)
+    res.send(buf)
 })
