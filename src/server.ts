@@ -1,27 +1,26 @@
 import express from 'express'
-import bodyParser from 'body-parser'
+import spdy from 'spdy'
 import fs from 'fs'
 import path from 'path'
 import dotenv from 'dotenv'
+import bodyParser from 'body-parser'
+const protobuf = require('protocol-buffers')
+
 dotenv.config()
 
 import db from './config/connectDB'
-
 db().get()
+
 const app = express()
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-
-/// test
-const protobuf = require('protocol-buffers')
-//
-
-
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-
-app.listen(process.env.PORT, () => {
-    console.log(`server On http://localhost:${process.env.PORT}`)
-})
+const sslPath = path.join(__dirname, '../ssl')
+const options = {
+    key: fs.readFileSync(`${sslPath}/server.key`, 'utf-8'),
+    cert: fs.readFileSync(`${sslPath}/server.crt`, 'utf-8'),
+    passphrase: process.env.SSL_PW
+}
 
 app.use('/', (req: express.Request, res: express.Response) => {
     const post1 = {
@@ -35,3 +34,9 @@ app.use('/', (req: express.Request, res: express.Response) => {
     console.log(buf)
     res.send(buf)
 })
+
+spdy.createServer(options, app).listen(process.env.PORT, () => {
+    console.log(`server On http://localhost:${process.env.PORT}`)
+})
+
+

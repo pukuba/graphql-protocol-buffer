@@ -3,7 +3,8 @@ const fetch = require('node-fetch')
 const path = require('path')
 const fs = require('fs')
 require('dotenv').config()
-const endpoint = `http://localhost:${process.env.PORT}`
+const endpoint = `https://localhost:${process.env.PORT}`
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 async function getAPI() {
     const response = await fetch(endpoint, {
         method: "POST"
